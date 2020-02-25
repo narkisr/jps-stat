@@ -27,6 +27,12 @@
 (defn used-ram [{:keys [resident data text shared]}]
   (/ (+ resident data text shared) 1024.0))
 
+(defn cpu-use [pid]
+  (let [{:keys [exit out err]} (sh "ps" "-p" pid "-o" "%cpu")]
+    (BigDecimal. (second (str/split (str/trim out) #" ")))))
+
 (comment
+  (jps)
+  (cpu-use "23989")
   (used-heap (jstat "24032"))
   (used-ram (ram "24032")))
