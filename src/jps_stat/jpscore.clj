@@ -18,7 +18,7 @@
     (when (= exit 0)
       (zipmap
        [:S0C :S1C :S0U :S1U :EC :EU :OC :OU :MC :MU :CCSC :CCSU :YGC :YGCT :FGC :FGCT :GCT]
-       (map (fn [n] (BigDecimal. n)) (filter (comp not empty?) (str/split (second (str/split out #"\n")) #" ")))))))
+       (map (fn [^String n] (BigDecimal. n)) (filter (comp not empty?) (str/split (second (str/split out #"\n")) #" ")))))))
 
 (defn used-heap [m]
   (when m
@@ -30,7 +30,7 @@
     (let [f (java.io.FileReader. (str "/proc/" pid "/statm"))]
       (zipmap
        [:size :resident :shared :text :lib :data :dt]
-       (map (fn [n] (BigDecimal. n)) (str/split (str/trim (slurp f)) #" "))))
+       (map (fn [n] (BigDecimal. ^String n)) (str/split (str/trim (slurp f)) #" "))))
     (catch java.io.FileNotFoundException e nil)))
 
 (defn used-ram [m]
@@ -42,7 +42,7 @@
   (let [{:keys [exit out]} (sh "ps" "-p" pid "-o" "%cpu")]
     (when (= exit 0)
       (when-let [c (second (str/split (str/trim out) #" "))]
-        (BigDecimal. c)))))
+        (BigDecimal. ^String c)))))
 
 (defn usage [{:keys [pid] :as m}]
   (merge m {:heap (used-heap (jstat pid)) :ram (used-ram (statm pid)) :cpu (cpu-use pid)}))
