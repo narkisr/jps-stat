@@ -1,4 +1,4 @@
-(ns clj-stat.core
+(ns jps-stat.core
   (:gen-class)
   (:require
    [table.core :refer [table]]
@@ -47,14 +47,14 @@
 (defn usage [{:keys [pid] :as m}]
   (merge m {:heap (used-heap (jstat pid)) :ram (used-ram (statm pid)) :cpu (cpu-use pid)}))
 
-(defn mb [i]
-  (str (int i) " MB"))
+(defn unit [u]
+  (fn [i] (str (int i) " MB")))
 
 (defn display [m]
   (-> m
-      (update :heap mb)
-      (update :ram mb)
-      (update :cpu float)))
+      (update :heap (unit "MB"))
+      (update :ram (unit "MB"))
+      (update :cpu (unit "%"))))
 
 (defn java-top []
   (table
@@ -64,10 +64,3 @@
 (defn -main [& args]
   (java-top)
   (System/exit 0))
-
-(comment
-  (java-top)
-  (jps)
-  (cpu-use "12744")
-  (used-heap (jstat "24032"))
-  (used-ram (statm "24032")))

@@ -1,7 +1,20 @@
 # Intro 
 
-TBD
+A simple tool to report java process heap, memory and cpu usage.
 
+This only supports Ubuntu at the moment.
+
+# Usage
+
+```bash
+./jps-stats
+
+pid    name     heap   ram     cpu  
+------------------------------------
+866    re-gent  78 MB  227 MB  .3  
+30484  core     31 MB  234 MB  1.6
+
+```
 # Copyright and license
 
 Copyright [2020] [Ronen Narkis]
