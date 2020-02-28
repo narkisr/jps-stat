@@ -5,6 +5,6 @@
   :dependencies [
       [rm-hull/table "0.7.0"]
       [org.clojure/clojure "1.10.1"]]
-  :repl-options {:init-ns jps-stat.core}
-  :main jps-stat.core
-  :aot [jps-stat.core])
+  :repl-options {:init-ns jps-stat.jpscore}
+  :main jps-stat.jpscore
+  :aot [jps-stat.jpscore])
