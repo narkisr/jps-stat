@@ -57,11 +57,10 @@
       (update :cpu (unit "%" float))))
 
 (defn java-top []
-  (let [us (pmap usage (jps))]
-    (table
-     (map display
-          (filter
-           (fn [{:keys [name] :as p}] (and (not (some nil? (vals p))) (= name "jpscore")))) us) :style :borderless)))
+  (letfn [(valid? [{:keys [name] :as p}]
+            (and (not (some nil? (vals p))) (not (= name "jpscore"))))]
+    (let [us (pmap usage (jps))]
+      (table (map display (filter valid? us)) :style :borderless))))
 
 (defn -main [& args]
   (java-top)
