@@ -1,8 +1,8 @@
 # Intro
 
-A simple tool to report java process heap, memory and cpu usage inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat)
+A simple tool to report java process heap, memory and cpu usage inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat).
 
-This only supports Ubuntu at the moment.
+This only supports Ubuntu at the moment, if you wish to add support to your OS please submit a PR.
 
 # Usage
 
