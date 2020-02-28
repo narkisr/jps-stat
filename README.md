@@ -1,6 +1,6 @@
-# Intro 
+# Intro
 
-A simple tool to report java process heap, memory and cpu usage.
+A simple tool to report java process heap, memory and cpu usage inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat)
 
 This only supports Ubuntu at the moment.
 
@@ -9,12 +9,13 @@ This only supports Ubuntu at the moment.
 ```bash
 ./jps-stats
 
-pid    name     heap   ram     cpu  
+pid    name     heap   ram     cpu
 ------------------------------------
-866    re-gent  78 MB  227 MB  .3  
+866    re-gent  78 MB  227 MB  .3
 30484  core     31 MB  234 MB  1.6
 
 ```
+
 # Copyright and license
 
 Copyright [2020] [Ronen Narkis]
