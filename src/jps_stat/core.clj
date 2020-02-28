@@ -47,14 +47,14 @@
 (defn usage [{:keys [pid] :as m}]
   (merge m {:heap (used-heap (jstat pid)) :ram (used-ram (statm pid)) :cpu (cpu-use pid)}))
 
-(defn unit [u]
-  (fn [i] (str (int i) " MB")))
+(defn unit [u f]
+  (fn [i] (str (f i) u)))
 
 (defn display [m]
   (-> m
-      (update :heap (unit "MB"))
-      (update :ram (unit "MB"))
-      (update :cpu (unit "%"))))
+      (update :heap (unit "MB" int))
+      (update :ram (unit "MB" int))
+      (update :cpu (unit "%" float))))
 
 (defn java-top []
   (table
