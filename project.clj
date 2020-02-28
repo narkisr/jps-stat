@@ -6,5 +6,7 @@
       [rm-hull/table "0.7.0"]
       [org.clojure/clojure "1.10.1"]]
   :repl-options {:init-ns jps-stat.jpscore}
+  ; supporting graalvm --no-fallback
+  :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
   :main jps-stat.jpscore
   :aot [jps-stat.jpscore])
