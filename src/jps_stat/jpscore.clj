@@ -1,4 +1,4 @@
-(ns jps-stat.core
+(ns jps-stat.jpscore
   (:gen-class)
   (:require
    [table.core :refer [table]]
@@ -57,9 +57,11 @@
       (update :cpu (unit "%" float))))
 
 (defn java-top []
-  (table
-   (map display
-        (filter (fn [p] (not (some nil? (vals p)))) (map usage (jps)))) :style :borderless))
+  (let [us (pmap usage (jps))]
+    (table
+     (map display
+          (filter
+           (fn [{:keys [name] :as p}] (and (not (some nil? (vals p))) (= name "jpscore")))) us) :style :borderless)))
 
 (defn -main [& args]
   (java-top)
