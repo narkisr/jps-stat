@@ -7,13 +7,25 @@ This only supports Ubuntu at the moment, if you wish to add support to your OS p
 # Usage
 
 ```bash
-./jps-stats
+$ jps-stats top
 
 pid    name     heap   ram     cpu
 ------------------------------------
-866    re-gent  78 MB  227 MB  .3
-30484  core     31 MB  234 MB  1.6
+866    re-gent  78 MB  227MB  .3
+30484  core     31 MB  234MB  1.6
 
+
+# Show raw data (no filtering)
+$ jps-stats raw
+
+{:pid 906, :name main, :heap 490.65302734375, :ram 963.4013671875, :cpu nil}
+{:pid 164, :name Jps, :heap nil, :ram nil, :cpu nil}
+{:pid 169, :name main, :heap 31.635546875, :ram 231.15234375, :cpu 239M}
+{:pid 138, :name main, :heap 22.60009765625, :ram 173.7705078125, :cpu nil}
+{:pid 2849, :name main, :heap 293.2935546875, :ram 294.8759765625, :cpu 3.7M}
+
+# Filter pid's with partial data same as top
+$ jps_stat raw --f true
 ```
 
 # Build
