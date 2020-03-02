@@ -1,7 +1,6 @@
 (ns jps-stat.jpscore
   (:gen-class)
   (:require
-   [clojure.pprint :refer (pprint)]
    [cli-matic.core :refer (run-cmd)]
    [table.core :refer [table]]
    [clojure.string :as str]
