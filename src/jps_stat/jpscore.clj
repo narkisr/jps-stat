@@ -1,6 +1,8 @@
 (ns jps-stat.jpscore
   (:gen-class)
   (:require
+   [clojure.pprint :refer (pprint)]
+   [cli-matic.core :refer (run-cmd)]
    [table.core :refer [table]]
    [clojure.string :as str]
    [clojure.java.shell :refer (sh)]))
@@ -56,12 +58,43 @@
       (update :ram (unit "MB" int))
       (update :cpu (unit "%" float))))
 
-(defn java-top []
+(defn java-top [_]
   (letfn [(valid? [{:keys [name] :as p}]
             (and (not (some nil? (vals p))) (not (= name "jpscore"))))]
     (let [us (pmap usage (jps))]
       (table (map display (filter valid? us)) :style :borderless))))
 
+(defn raw [{:keys [f]}]
+  (letfn [(valid? [{:keys [name] :as p}]
+            (and (not (some nil? (vals p))) (not (= name "jpscore"))))]
+    (let [us (pmap usage (jps))]
+      (doseq [p (if f (filter valid? us) us)]
+        (println p)))))
+
+(def cli
+  {:app {:command     "jps-stat"
+         :description "Java processe stats"
+         :version     "0.1.0"}
+
+   :global-opts []
+
+   :commands    [{:command     "top"
+                  :description "Run and get the stats for the curret running jvm processes"
+                  :opts        []
+                  :runs        java-top}
+
+                 {:command     "raw"
+                  :description "Run and get the stats printing them in raw edn format"
+                  :opts        [{:option "f" :as "Filter" :type :flag}]
+                  :runs        raw}]})
+
 (defn -main [& args]
-  (java-top)
-  (System/exit 0))
+  (try
+    (run-cmd args cli)
+    (System/exit 0)
+    (catch Exception e
+      (println e)
+      (System/exit 1))))
+
+(comment
+  (statm "4336"))

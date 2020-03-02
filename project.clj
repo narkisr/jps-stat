@@ -5,7 +5,9 @@
 
   :dependencies [
       [org.clojure/clojure "1.10.1"]
-      [rm-hull/table "0.7.0"]]
+      [rm-hull/table "0.7.0"]
+      [cli-matic "0.3.11"]
+  ]
 
   :repl-options {:init-ns jps-stat.jpscore}
 
