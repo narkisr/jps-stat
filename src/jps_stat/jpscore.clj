@@ -46,7 +46,7 @@
 (defn cpu-use [pid]
   (let [{:keys [exit out]} (sh "ps" "-p" pid "-o" "%cpu")]
     (when (= exit 0)
-      (when-let [c (second (str/split (str/trim out) #" "))]
+      (when-let [c (second (str/split (str/trim out) #"\s+"))]
         (BigDecimal. ^String c)))))
 
 (defn usage [{:keys [pid] :as m}]
@@ -102,5 +102,5 @@
       (System/exit 1))))
 
 (comment
-  (gc-per (jstat "4324"))
+  (cpu-use "10021")
   (statm "4336"))
