@@ -27,4 +27,15 @@
   :aliases {
       "travis" ["cljfmt" "check"]
    }
+
+  :profiles {
+    :dev {
+      :set-version {
+         :updates [
+            {:path "src/jps_stat/jpscore.clj" :search-regex #"\"\d+\.\d+\.\d+\""}
+          ]}
+       :aot [octo.core]
+      }
+  }
+
 )
