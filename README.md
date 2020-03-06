@@ -1,6 +1,13 @@
 # Intro
 
-A simple tool to report java process heap, memory and cpu usage inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat).
+A simple tool to report java processes:
+
+* Heap usage
+* RAM usage
+* CPU usage
+* GC usage
+
+Inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat)
 
 This only supports Ubuntu at the moment, if you wish to add support to your OS please submit a PR.
 
@@ -9,20 +16,18 @@ This only supports Ubuntu at the moment, if you wish to add support to your OS p
 ```bash
 $ jps-stats top
 
-pid    name     heap   ram     cpu
-------------------------------------
-866    re-gent  78 MB  227MB  .3
-30484  core     31 MB  234MB  1.6
+pid    name  heap   gc    ram    cpu
+-------------------------------------
+20699  main  311MB  0.0%  293MB  0.2%
+21084  main  131MB  0.0%  964MB  1.8%
 
 
 # Show raw data (no filtering)
 $ jps-stats raw
 
-{:pid 906, :name main, :heap 490.65302734375, :ram 963.4013671875, :cpu nil}
-{:pid 164, :name Jps, :heap nil, :ram nil, :cpu nil}
-{:pid 169, :name main, :heap 31.635546875, :ram 231.15234375, :cpu 239M}
-{:pid 138, :name main, :heap 22.60009765625, :ram 173.7705078125, :cpu nil}
-{:pid 2849, :name main, :heap 293.2935546875, :ram 294.8759765625, :cpu 3.7M}
+{:pid 22873, :name Jps, :heap nil, :gc nil, :ram nil, :cpu nil}
+{:pid 20699, :name main, :heap 311.74189453125, :gc 0.000M, :ram 293.8486328125, :cpu 0.2M}
+{:pid 21084, :name main, :heap 149.922265625, :gc 0.000M, :ram 964.1796875, :cpu 1.8M}
 
 # Filter pid's with partial data same as top
 $ jps_stat raw --f true
