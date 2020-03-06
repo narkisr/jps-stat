@@ -6,6 +6,8 @@
    [clojure.string :as str]
    [clojure.java.shell :refer (sh)]))
 
+;; (set! *warn-on-reflection* true)
+
 (defn jps []
   (let [{:keys [exit out err]} (sh "jps")]
     (if-not (= exit 0)
@@ -27,7 +29,7 @@
 
 (defn gc-per [m]
   (when m
-    (.divide (m :GCT) (m :timestamp) java.math.RoundingMode/HALF_EVEN)))
+    (.divide ^BigDecimal (m :GCT) ^BigDecimal (m :timestamp) java.math.RoundingMode/HALF_EVEN)))
 
 (defn statm
   [pid]

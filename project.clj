@@ -34,7 +34,6 @@
          :updates [
             {:path "src/jps_stat/jpscore.clj" :search-regex #"\"\d+\.\d+\.\d+\""}
           ]}
-       :aot [octo.core]
       }
   }
 
