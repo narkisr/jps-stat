@@ -81,7 +81,7 @@
 (def cli
   {:app {:command     "jps-stat"
          :description "Java processe stats"
-         :version     "0.2.1"}
+         :version     "0.2.2"}
 
    :global-opts []
 
