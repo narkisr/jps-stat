@@ -15,15 +15,19 @@
 (defn jstat
   "https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html"
   [pid]
-  (let [{:keys [exit out err]} (sh "jstat" "-gc" pid "1" "1")]
+  (let [{:keys [exit out err]} (sh "jstat" "-gc" "-t" pid "1" "1")]
     (when (= exit 0)
       (zipmap
-       [:S0C :S1C :S0U :S1U :EC :EU :OC :OU :MC :MU :CCSC :CCSU :YGC :YGCT :FGC :FGCT :GCT]
+       [:timestamp :S0C :S1C :S0U :S1U :EC :EU :OC :OU :MC :MU :CCSC :CCSU :YGC :YGCT :FGC :FGCT :GCT]
        (map (fn [^String n] (BigDecimal. n)) (filter (comp not empty?) (str/split (second (str/split out #"\n")) #" ")))))))
 
 (defn used-heap [m]
   (when m
     (/ (apply + (vals (select-keys m [:S0U :S1U :EU :OU]))) 1024.0)))
+
+(defn gc-per [m]
+  (when m
+    (.divide (m :GCT) (m :timestamp) java.math.RoundingMode/HALF_EVEN)))
 
 (defn statm
   [pid]
@@ -46,7 +50,8 @@
         (BigDecimal. ^String c)))))
 
 (defn usage [{:keys [pid] :as m}]
-  (merge m {:heap (used-heap (jstat pid)) :ram (used-ram (statm pid)) :cpu (cpu-use pid)}))
+  (let [stats (jstat pid)]
+    (merge m {:heap (used-heap stats) :gc (gc-per stats) :ram (used-ram (statm pid)) :cpu (cpu-use pid)})))
 
 (defn unit [u f]
   (fn [i] (str (f i) u)))
@@ -55,7 +60,8 @@
   (-> m
       (update :heap (unit "MB" int))
       (update :ram (unit "MB" int))
-      (update :cpu (unit "%" float))))
+      (update :cpu (unit "%" float))
+      (update :gc (unit "%" float))))
 
 (defn java-top [_]
   (letfn [(valid? [{:keys [name] :as p}]
@@ -73,7 +79,7 @@
 (def cli
   {:app {:command     "jps-stat"
          :description "Java processe stats"
-         :version     "0.1.0"}
+         :version     "0.2.0"}
 
    :global-opts []
 
@@ -96,4 +102,5 @@
       (System/exit 1))))
 
 (comment
+  (gc-per (jstat "4324"))
   (statm "4336"))
