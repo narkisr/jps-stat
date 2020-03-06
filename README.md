@@ -31,6 +31,10 @@ $ jps-stats raw
 
 # Filter pid's with partial data same as top
 $ jps_stat raw --f true
+
+{:pid 20699, :name main, :heap 311.74189453125, :gc 0.000M, :ram 293.8486328125, :cpu 0.2M}
+{:pid 21084, :name main, :heap 149.922265625, :gc 0.000M, :ram 964.1796875, :cpu 1.8M}
+
 ```
 
 # Build
