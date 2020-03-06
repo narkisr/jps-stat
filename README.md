@@ -34,7 +34,7 @@ Make sure to have the latest graalvm native-image tool:
 
 ```bash
 $ lein uberjar
-$ native-image -jar target/jps-stat-0.1.0-standalone.jar --no-fallback --report-unsupported-elements-at-runtime --initialize-at-build-time --allow-incomplete-classpath
+$ native-image -jar target/jps-stat-0.2.2-standalone.jar --no-fallback --report-unsupported-elements-at-runtime --initialize-at-build-time --allow-incomplete-classpath
 ```
 
 # Copyright and license

@@ -33,6 +33,7 @@
       :set-version {
          :updates [
             {:path "src/jps_stat/jpscore.clj" :search-regex #"\"\d+\.\d+\.\d+\""}
+            {:path "README.md" :search-regex #"\"\d+\.\d+\.\d+\""}
           ]}
       }
   }
