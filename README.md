@@ -10,7 +10,7 @@ A simple tool to respot java processes resources usage, including:
 Inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat).
 
 Requirements:
- * This tool currently only supports Ubuntu at the moment (if you wish to add support to your OS please submit a PR).
+ * This tool only supports Ubuntu at the moment (if you wish to add support to your OS please submit a PR).
  * jps and jstat (both are bundled with the JDK).
 
 # Usage
