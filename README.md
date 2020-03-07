@@ -15,6 +15,8 @@ Requirements:
 
 # Usage
 
+Download the [latest](https://github.com/narkisr/jps-stat/releases/latest) release and add it to you path.
+
 ```bash
 $ jps-stats top
 
