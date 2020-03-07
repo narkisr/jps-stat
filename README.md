@@ -1,6 +1,6 @@
 # Intro
 
-A simple tool to report java processes:
+A simple tool to respot java processes resources usage, including:
 
 * Heap usage
 * RAM usage
@@ -9,7 +9,7 @@ A simple tool to report java processes:
 
 Inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat)
 
-This only supports Ubuntu at the moment, if you wish to add support to your OS please submit a PR.
+This tool currently only supports Ubuntu at the moment, if you wish to add support to your OS please submit a PR.
 
 # Usage
 
