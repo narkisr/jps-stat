@@ -7,9 +7,11 @@ A simple tool to respot java processes resources usage, including:
 * CPU usage
 * GC usage
 
-Inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat)
+Inspired by [jps_stat](https://github.com/amarjeetanandsingh/jps_stat).
 
-This tool currently only supports Ubuntu at the moment, if you wish to add support to your OS please submit a PR.
+Requirements:
+ * This tool currently only supports Ubuntu at the moment (if you wish to add support to your OS please submit a PR).
+ * jps and jstat (both are bundled with the JDK).
 
 # Usage
 
